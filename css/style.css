@@ -1,134 +1,40 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    direction: rtl;
-}
+/* הוסף זאת לקובץ css/style.css */
 
-#app {
+.category-tabs {
     display: flex;
-    flex-direction: column;
-    height: 100vh;
-}
-
-header {
-    background-color: #4a6cd4;
-    color: white;
-    padding: 10px;
-    text-align: center;
-}
-
-main {
-    display: flex;
-    flex-grow: 1;
-}
-
-#workspace {
-    display: flex;
-    width: 100%;
-}
-
-#stage-area {
-    flex: 1;
-    padding: 10px;
-    background-color: #f0f0f0;
-}
-
-#stage {
-    background-color: white;
-    border: 1px solid #ccc;
-}
-
-#script-area {
-    flex: 2;
-    display: flex;
-    flex-direction: column;
-    background-color: #e0e0e0;
-}
-
-#category-tabs {
-    display: flex;
-    justify-content: flex-start;
-    background-color: #d0d0d0;
-    padding: 5px;
+    justify-content: space-around;
+    margin-bottom: 10px;
 }
 
 .category-tab {
-    padding: 8px 15px;
-    margin: 0 5px;
-    border: none;
+    padding: 5px 10px;
     border-radius: 5px 5px 0 0;
     cursor: pointer;
-    font-weight: bold;
-    color: white;
-    font-size: 14px;
 }
 
-#block-palette {
-    flex: 1;
-    background-color: #f0f0f0;
-    padding: 10px;
+.blocks-area {
     display: flex;
     flex-wrap: wrap;
-    align-content: flex-start;
-    overflow-y: auto;
-    max-height: 30vh;
-}
-
-#script-workspace {
-    flex: 2;
-    background-color: #fff;
-    border: 1px solid #ccc;
+    gap: 10px;
     padding: 10px;
-    min-height: 200px;
-    overflow-y: auto;
+    background-color: #f0f0f0;
+    border-radius: 0 0 5px 5px;
 }
 
 .block {
-    display: inline-flex;
+    display: flex;
     align-items: center;
-    padding: 8px 12px;
-    margin: 5px;
+    padding: 5px 10px;
     border-radius: 5px;
     cursor: move;
-    color: white;
-    font-weight: bold;
-    font-size: 14px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    user-select: none;
 }
 
 .block-icon {
-    margin-left: 8px;
-    font-size: 18px;
+    font-size: 1.2em;
+    margin-right: 5px;
 }
 
-footer {
-    background-color: #4a6cd4;
-    color: white;
-    text-align: center;
-    padding: 10px;
-}
-
-/* תוספת סגנונות חדשים */
-.category-tab:hover {
-    opacity: 0.9;
-}
-
-.block:hover {
-    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-}
-
-/* התאמות למסכים קטנים */
-@media (max-width: 768px) {
-    #workspace {
-        flex-direction: column;
-    }
-
-    #stage-area, #script-area {
-        flex: none;
-    }
-
-    #block-palette {
-        max-height: 200px;
-    }
+.block-name {
+    font-size: 0.9em;
 }
