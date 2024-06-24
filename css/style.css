@@ -2,6 +2,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    direction: rtl;
 }
 
 #app {
@@ -14,37 +15,37 @@ header {
     background-color: #4a6cd4;
     color: white;
     padding: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    text-align: center;
 }
 
 main {
-    flex-grow: 1;
     display: flex;
+    flex-grow: 1;
 }
 
 #workspace {
     display: flex;
-    flex-grow: 1;
+    width: 100%;
 }
 
 #stage-area {
-    flex: 2;
+    flex: 1;
     padding: 10px;
 }
 
 #script-area {
-    flex: 3;
+    flex: 2;
     display: flex;
     flex-direction: column;
-    padding: 10px;
 }
 
 #block-palette {
     flex: 1;
     background-color: #f0f0f0;
     padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
 }
 
 #script-workspace {
@@ -55,18 +56,6 @@ main {
     min-height: 200px;
 }
 
-.category-tabs {
-    display: flex;
-    margin-bottom: 10px;
-}
-
-.category-tab {
-    padding: 5px 10px;
-    margin-right: 5px;
-    border: none;
-    cursor: pointer;
-}
-
 .block {
     display: inline-flex;
     align-items: center;
@@ -74,10 +63,12 @@ main {
     margin: 5px;
     border-radius: 5px;
     cursor: move;
+    color: white;
+    font-weight: bold;
 }
 
 .block-icon {
-    margin-right: 5px;
+    margin-left: 5px;
 }
 
 footer {
