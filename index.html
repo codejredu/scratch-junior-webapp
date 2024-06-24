@@ -5,49 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ScratchJr Web</title>
     <link rel="stylesheet" href="css/style.css">
-    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
 </head>
 <body>
     <div id="app">
         <header>
             <h1>ScratchJr Web</h1>
-            <nav>
-                <button id="new-project">פרויקט חדש</button>
-                <button id="save-project">שמור פרויקט</button>
-                <button id="load-project">טען פרויקט</button>
-            </nav>
         </header>
         
         <main>
             <div id="workspace">
                 <div id="stage-area">
                     <canvas id="stage" width="480" height="360"></canvas>
-                    <div id="sprite-list"></div>
                 </div>
                 
                 <div id="script-area">
                     <div id="block-palette"></div>
                     <div id="script-workspace"></div>
-                </div>
-            </div>
-            
-            <div id="character-editor" class="modal" style="display: none;">
-                <div class="modal-content">
-                    <h2>עורך דמויות</h2>
-                    <canvas id="character-canvas" width="300" height="300"></canvas>
-                    <div id="paint-tools"></div>
-                    <button id="save-character">שמור דמות</button>
-                    <button id="close-character-editor">סגור</button>
-                </div>
-            </div>
-            
-            <div id="background-editor" class="modal" style="display: none;">
-                <div class="modal-content">
-                    <h2>עורך רקעים</h2>
-                    <canvas id="background-canvas" width="480" height="360"></canvas>
-                    <div id="background-tools"></div>
-                    <button id="save-background">שמור רקע</button>
-                    <button id="close-background-editor">סגור</button>
                 </div>
             </div>
         </main>
@@ -57,6 +30,6 @@
         </footer>
     </div>
 
-    <script src="js/main.js" type="module"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>
