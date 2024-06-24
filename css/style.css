@@ -1,40 +1,88 @@
-/* הוסף זאת לקובץ css/style.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+#app {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+header {
+    background-color: #4a6cd4;
+    color: white;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+main {
+    flex-grow: 1;
+    display: flex;
+}
+
+#workspace {
+    display: flex;
+    flex-grow: 1;
+}
+
+#stage-area {
+    flex: 2;
+    padding: 10px;
+}
+
+#script-area {
+    flex: 3;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+#block-palette {
+    flex: 1;
+    background-color: #f0f0f0;
+    padding: 10px;
+}
+
+#script-workspace {
+    flex: 2;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    min-height: 200px;
+}
 
 .category-tabs {
     display: flex;
-    justify-content: space-around;
     margin-bottom: 10px;
 }
 
 .category-tab {
     padding: 5px 10px;
-    border-radius: 5px 5px 0 0;
+    margin-right: 5px;
+    border: none;
     cursor: pointer;
 }
 
-.blocks-area {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    padding: 10px;
-    background-color: #f0f0f0;
-    border-radius: 0 0 5px 5px;
-}
-
 .block {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     padding: 5px 10px;
+    margin: 5px;
     border-radius: 5px;
     cursor: move;
-    user-select: none;
 }
 
 .block-icon {
-    font-size: 1.2em;
     margin-right: 5px;
 }
 
-.block-name {
-    font-size: 0.9em;
+footer {
+    background-color: #4a6cd4;
+    color: white;
+    text-align: center;
+    padding: 10px;
 }
