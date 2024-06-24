@@ -39,6 +39,23 @@ main {
     flex-direction: column;
 }
 
+#category-tabs {
+    display: flex;
+    justify-content: flex-start;
+    background-color: #f0f0f0;
+    padding: 5px;
+}
+
+.category-tab {
+    padding: 5px 10px;
+    margin: 0 5px;
+    border: none;
+    border-radius: 5px 5px 0 0;
+    cursor: pointer;
+    font-weight: bold;
+    color: white;
+}
+
 #block-palette {
     flex: 1;
     background-color: #f0f0f0;
