@@ -1,30 +1,40 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f0f0f0;
-}
+/* הוסף זאת לקובץ css/style.css */
 
-#app {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-header {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-#scratchjr-canvas {
-    border: 2px solid #333;
-    display: block;
-    margin: 0 auto;
-}
-
-#block-palette {
-    margin-top: 20px;
+.category-tabs {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
+    margin-bottom: 10px;
+}
+
+.category-tab {
+    padding: 5px 10px;
+    border-radius: 5px 5px 0 0;
+    cursor: pointer;
+}
+
+.blocks-area {
+    display: flex;
     flex-wrap: wrap;
+    gap: 10px;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-radius: 0 0 5px 5px;
+}
+
+.block {
+    display: flex;
+    align-items: center;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: move;
+    user-select: none;
+}
+
+.block-icon {
+    font-size: 1.2em;
+    margin-right: 5px;
+}
+
+.block-name {
+    font-size: 0.9em;
 }
