@@ -1,36 +1,17 @@
 <!DOCTYPE html>
-<html lang="he" dir="rtl">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ScratchJr Web</title>
-    <link rel="stylesheet" href="css/style.css">
+  <title>ScratchJr</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="app">
-        <header>
-            <h1>ScratchJr Web</h1>
-        </header>
-        
-        <main>
-            <div id="workspace">
-                <div id="stage-area">
-                    <canvas id="stage" width="480" height="360"></canvas>
-                </div>
-                
-                <div id="script-area">
-                    <div id="category-tabs"></div>
-                    <div id="block-palette"></div>
-                    <div id="script-workspace"></div>
-                </div>
-            </div>
-        </main>
-        
-        <footer>
-            <p>ScratchJr Web - גרסת אינטרנט © 2024</p>
-        </footer>
-    </div>
+  <h1>ברוכים הבאים ל-ScratchJr!</h1>
+  <canvas id="gameCanvas" width="800" height="600"></canvas>
 
-    <script src="js/main.js"></script>
+  <div id="blockPalette">
+    <!-- blocks will be added here -->
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
