@@ -20,6 +20,10 @@
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
 
+        // Background image (replace with your image file)
+        const backgroundImage = new Image();
+        backgroundImage.src = 'path/to/background.png';
+
         // Frog object (replace with your image or sprite)
         const frog = {
             x: canvas.width / 2,
@@ -30,35 +34,44 @@
                 ctx.fillStyle = 'green';
                 ctx.fillRect(this.x, this.y, this.width, this.height);
             }
-        }
+        };
 
-        // Update frog position based on key presses (add event listeners)
-        function handleKeyDown(event) {
-            switch (event.key) {
-                case 'ArrowUp':
-                    frog.y -= 10;
-                    break;
-                case 'ArrowDown':
-                    frog.y += 10;
-                    break;
-                case 'ArrowLeft':
-                    frog.x -= 10;
-                    break;
-                case 'ArrowRight':
-                    frog.x += 10;
-                    break;
+        // Car object (replace with multiple cars for different lanes)
+        const car = {
+            x: 100,
+            y: 200,
+            width: 50,
+            height: 20,
+            speed: 5,
+            draw() {
+                ctx.fillStyle = 'red';
+                ctx.fillRect(this.x, this.y, this.width, this.height);
+            },
+            update() {
+                this.x += this.speed;
+                if (this.x > canvas.width) {
+                    this.x = -this.width;
+                }
             }
-        }
+        };
 
-        document.addEventListener('keydown', handleKeyDown);
-
-        // Function to draw the game (call this repeatedly)
+        // Function to draw the game
         function draw() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            // Draw road, cars, river, logs (add your logic here)
+            // Draw background image
+            ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
 
+            // Draw river
+            ctx.fillStyle = 'blue';
+            ctx.fillRect(0, 150, canvas.width, 100);
+
+            // Draw frog
             frog.draw();
+
+            // Draw car
+            car.draw();
+            car.update();
 
             // Check for collisions (add logic)
 
