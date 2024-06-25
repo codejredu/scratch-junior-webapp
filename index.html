@@ -4,91 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Scratch Junior-like Interface</title>
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-        }
-        .container {
-            display: grid;
-            grid-template-columns: 200px 1fr;
-            grid-template-rows: auto 1fr auto;
-            gap: 10px;
-            height: 100vh;
-            padding: 10px;
-        }
-        .header {
-            grid-column: 1 / -1;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #ffffff;
-            padding: 10px;
-            border-radius: 10px;
-        }
-        .home-button {
-            background-color: #ff9900;
-            color: white;
-            padding: 10px;
-            border-radius: 50%;
-            text-decoration: none;
-        }
-        .sidebar {
-            background-color: #ffffff;
-            padding: 10px;
-            border-radius: 10px;
-        }
-        .stage {
-            background-color: #ffffff;
-            border-radius: 10px;
-        }
-        .tools {
-            grid-column: 1 / -1;
-            display: flex;
-            justify-content: space-between;
-            background-color: #ffffff;
-            padding: 10px;
-            border-radius: 10px;
-        }
-        .tool-button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .programming-area {
-            grid-column: 1 / -1;
-            background-color: #ffffff;
-            padding: 20px;
-            border-radius: 10px;
-        }
-        .block-categories {
-            display: flex;
-            justify-content: space-around;
-            margin-bottom: 10px;
-        }
-        .category-button {
-            color: white;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-        .category-button.triggering { background-color: #FFC300; }
-        .category-button.motion { background-color: #4A86E8; }
-        .category-button.looks { background-color: #9900FF; }
-        .category-button.sounds { background-color: #00CC00; }
-        .category-button.control { background-color: #FF9900; }
-        .category-button.end { background-color: #FF0000; }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
@@ -117,4 +33,16 @@
         </div>
         
         <div class="programming-area">
-            <div class="blo
+            <div class="block-categories">
+                <button class="category-button triggering">Triggering</button>
+                <button class="category-button motion">Motion</button>
+                <button class="category-button looks">Looks</button>
+                <button class="category-button sounds">Sounds</button>
+                <button class="category-button control">Control</button>
+                <button class="category-button end">End</button>
+            </div>
+            <!-- Drag and drop blocks will be added here -->
+        </div>
+    </div>
+</body>
+</html>
