@@ -1,10 +1,73 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Frogger Game</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frogger Game</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        #canvas {
+            border: 1px solid black;
+        }
+    </style>
 </head>
 <body>
-  <canvas id="gameCanvas" width="500" height="400"></canvas>
-  <script src="frogger.js"></script>
+    <canvas id="canvas" width="600" height="400"></canvas>
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+
+        // Frog object (replace with your image or sprite)
+        const frog = {
+            x: canvas.width / 2,
+            y: canvas.height - 50,
+            width: 30,
+            height: 30,
+            draw() {
+                ctx.fillStyle = 'green';
+                ctx.fillRect(this.x, this.y, this.width, this.height);
+            }
+        }
+
+        // Update frog position based on key presses (add event listeners)
+        function handleKeyDown(event) {
+            switch (event.key) {
+                case 'ArrowUp':
+                    frog.y -= 10;
+                    break;
+                case 'ArrowDown':
+                    frog.y += 10;
+                    break;
+                case 'ArrowLeft':
+                    frog.x -= 10;
+                    break;
+                case 'ArrowRight':
+                    frog.x += 10;
+                    break;
+            }
+        }
+
+        document.addEventListener('keydown', handleKeyDown);
+
+        // Function to draw the game (call this repeatedly)
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Draw road, cars, river, logs (add your logic here)
+
+            frog.draw();
+
+            // Check for collisions (add logic)
+
+            // Update game state (score, time, level)
+
+            window.requestAnimationFrame(draw);
+        }
+
+        draw();
+    </script>
 </body>
 </html>
