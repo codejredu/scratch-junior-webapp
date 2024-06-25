@@ -5,9 +5,70 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Scratch Junior-like Interface</title>
     <style>
-        /* ... (previous styles remain the same) ... */
-
-        /* Updated Block categories menu */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        .container {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            grid-template-rows: auto 1fr auto;
+            gap: 10px;
+            height: 100vh;
+            padding: 10px;
+        }
+        .header {
+            grid-column: 1 / -1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #ffffff;
+            padding: 10px;
+            border-radius: 10px;
+        }
+        .home-button {
+            background-color: #ff9900;
+            color: white;
+            padding: 10px;
+            border-radius: 50%;
+            text-decoration: none;
+        }
+        .sidebar {
+            background-color: #ffffff;
+            padding: 10px;
+            border-radius: 10px;
+        }
+        .stage {
+            background-color: #ffffff;
+            border-radius: 10px;
+        }
+        .tools {
+            grid-column: 1 / -1;
+            display: flex;
+            justify-content: space-between;
+            background-color: #ffffff;
+            padding: 10px;
+            border-radius: 10px;
+        }
+        .tool-button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .programming-area {
+            grid-column: 1 / -1;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+        }
         .block-categories {
             display: flex;
             justify-content: space-around;
@@ -31,20 +92,29 @@
 </head>
 <body>
     <div class="container">
-        <!-- ... (previous content remains the same) ... -->
-
-        <!-- Updated Programming area -->
-        <div class="programming-area">
-            <div class="block-categories">
-                <button class="category-button triggering">Triggering</button>
-                <button class="category-button motion">Motion</button>
-                <button class="category-button looks">Looks</button>
-                <button class="category-button sounds">Sounds</button>
-                <button class="category-button control">Control</button>
-                <button class="category-button end">End</button>
-            </div>
-            <!-- Drag and drop blocks will be added here -->
+        <header class="header">
+            <a href="#" class="home-button">Home</a>
+            <h1>Scratch Junior-like Interface</h1>
+        </header>
+        
+        <aside class="sidebar">
+            <h2>Characters</h2>
+            <!-- Add character selection items here -->
+            <h2>Backgrounds</h2>
+            <!-- Add background selection items here -->
+        </aside>
+        
+        <main class="stage">
+            <!-- Stage content will be displayed here -->
+        </main>
+        
+        <div class="tools">
+            <button class="tool-button">Paint</button>
+            <button class="tool-button">Resize</button>
+            <button class="tool-button">Save</button>
+            <button class="tool-button">Load</button>
+            <button class="tool-button" style="font-size: 1.5em;">▶</button>
         </div>
-    </div>
-</body>
-</html>
+        
+        <div class="programming-area">
+            <div class="blo
