@@ -1,48 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scratch Junior-like Interface</title>
-    <link rel="stylesheet" href="styles.css">
+  <title>Frogger Game</title>
 </head>
 <body>
-    <div class="container">
-        <header class="header">
-            <a href="#" class="home-button">Home</a>
-            <h1>Scratch Junior-like Interface</h1>
-        </header>
-        
-        <aside class="sidebar">
-            <h2>Characters</h2>
-            <!-- Add character selection items here -->
-            <h2>Backgrounds</h2>
-            <!-- Add background selection items here -->
-        </aside>
-        
-        <main class="stage">
-            <!-- Stage content will be displayed here -->
-        </main>
-        
-        <div class="tools">
-            <button class="tool-button">Paint</button>
-            <button class="tool-button">Resize</button>
-            <button class="tool-button">Save</button>
-            <button class="tool-button">Load</button>
-            <button class="tool-button" style="font-size: 1.5em;">▶</button>
-        </div>
-        
-        <div class="programming-area">
-            <div class="block-categories">
-                <button class="category-button triggering">Triggering</button>
-                <button class="category-button motion">Motion</button>
-                <button class="category-button looks">Looks</button>
-                <button class="category-button sounds">Sounds</button>
-                <button class="category-button control">Control</button>
-                <button class="category-button end">End</button>
-            </div>
-            <!-- Drag and drop blocks will be added here -->
-        </div>
-    </div>
+  <canvas id="gameCanvas" width="500" height="400"></canvas>
+  <script src="frogger.js"></script>
 </body>
 </html>
