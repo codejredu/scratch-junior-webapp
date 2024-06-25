@@ -1,0 +1,103 @@
+/* Basic reset and general styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    grid-template-rows: auto 1fr auto;
+    gap: 10px;
+    height: 100vh;
+    padding: 10px;
+}
+
+/* Header styles */
+.header {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.home-button {
+    background-color: #ff9900;
+    color: white;
+    padding: 10px;
+    border-radius: 50%;
+    text-decoration: none;
+}
+
+/* Sidebar styles */
+.sidebar {
+    background-color: #ffffff;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+/* Stage area styles */
+.stage {
+    background-color: #ffffff;
+    border-radius: 10px;
+}
+
+/* Tool area styles */
+.tools {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: space-between;
+    background-color: #ffffff;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.tool-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Programming area styles */
+.programming-area {
+    grid-column: 1 / -1;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+/* Block categories menu */
+.block-categories {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 10px;
+}
+
+.category-button {
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* Specific colors for each category */
+.category-button.triggering { background-color: #FFC300; }
+.category-button.motion { background-color: #4A86E8; }
+.category-button.looks { background-color: #9900FF; }
+.category-button.sounds { background-color: #00CC00; }
+.category-button.control { background-color: #FF9900; }
+.category-button.end { background-color: #FF0000; }
