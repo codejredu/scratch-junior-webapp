@@ -1,33 +1,27 @@
-class MyExtension {
-    constructor (runtime) {
-        this.runtime = runtime;
-        this.runtime.registerExtension('MyExtension', this);
-    }
+(function(ext) {
+    // Cleanup function when the extension is unloaded
+    ext._shutdown = function() {};
 
-    getInfo () {
-        return {
-            id: 'myExtension',
-            name: 'My Extension',
-            blocks: [
-                {
-                    opcode: 'sayHello',
-                    blockType: Scratch.BlockType.COMMAND,
-                    text: 'Say Hello to [NAME]',
-                    arguments: {
-                        NAME: {
-                            type: Scratch.ArgumentType.STRING,
-                            defaultValue: 'World'
-                        }
-                    }
-                }
-            ]
-        };
-    }
+    // Status reporting function
+    ext._getStatus = function() {
+        return {status: 2, msg: 'Ready'};
+    };
 
-    sayHello (args) {
-        const name = args.NAME;
-        console.log(`Hello, ${name}!`);
-    }
-}
+    // Your custom blocks
+    ext.myCustomBlock = function() {
+        // Block functionality here
+        alert('Custom block executed!');
+    };
 
-module.exports = MyExtension;
+    // Block definitions
+    var descriptor = [
+        {
+            opcode: 'myCustomBlock',
+            blockType: Scratch.BlockType.COMMAND,
+            text: 'my custom block'
+        }
+    ];
+
+    // Register the extension
+    Scratch.extensions.register('My Custom Extension', descriptor);
+})({});
