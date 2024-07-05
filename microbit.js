@@ -1,69 +1,97 @@
-// micro:bit Bluetooth UUIDs
-const MICROBIT_SERVICE_UUID = 'e95dd91d-251d-470a-a062-fa1922dfa9a8';
-const LED_STATE_CHARACTERISTIC_UUID = 'e95d7b77-251d-470a-a062-fa1922dfa9a8';
+class Scratch3MicrobitExtension {
+    constructor(runtime) {
+        this.runtime = runtime;
+        this.device = null;
+        this.ledCharacteristic = null;
+    }
 
-let microbitDevice;
-let ledCharacteristic;
+    getInfo() {
+        return {
+            id: 'microbitLED',
+            name: 'micro:bit LED',
+            blocks: [
+                {
+                    opcode: 'connectMicrobit',
+                    blockType: 'command',
+                    text: 'Connect to micro:bit'
+                },
+                {
+                    opcode: 'setLED',
+                    blockType: 'command',
+                    text: 'Set LED at x: [X] y: [Y] to [STATE]',
+                    arguments: {
+                        X: {
+                            type: 'number',
+                            defaultValue: 0
+                        },
+                        Y: {
+                            type: 'number',
+                            defaultValue: 0
+                        },
+                        STATE: {
+                            type: 'string',
+                            menu: 'ledStates',
+                            defaultValue: 'on'
+                        }
+                    }
+                }
+            ],
+            menus: {
+                ledStates: ['on', 'off']
+            }
+        };
+    }
 
-// Connect to micro:bit
-async function connectMicrobit() {
-    try {
-        console.log('Requesting Bluetooth Device...');
-        microbitDevice = await navigator.bluetooth.requestDevice({
-            filters: [{ services: [MICROBIT_SERVICE_UUID] }]
+    connectMicrobit() {
+        return navigator.bluetooth.requestDevice({
+            filters: [{ services: ['e95dd91d-251d-470a-a062-fa1922dfa9a8'] }]
+        })
+        .then(device => {
+            this.device = device;
+            return device.gatt.connect();
+        })
+        .then(server => server.getPrimaryService('e95dd91d-251d-470a-a062-fa1922dfa9a8'))
+        .then(service => service.getCharacteristic('e95d7b77-251d-470a-a062-fa1922dfa9a8'))
+        .then(characteristic => {
+            this.ledCharacteristic = characteristic;
+            return 'Connected to micro:bit';
+        })
+        .catch(error => {
+            console.error('Connection error:', error);
+            return 'Failed to connect';
         });
+    }
 
-        console.log('Connecting to GATT Server...');
-        const server = await microbitDevice.gatt.connect();
+    setLED(args) {
+        if (!this.ledCharacteristic) {
+            return 'Not connected to micro:bit';
+        }
 
-        console.log('Getting LED Service...');
-        const service = await server.getPrimaryService(MICROBIT_SERVICE_UUID);
+        const x = Math.floor(args.X);
+        const y = Math.floor(args.Y);
+        const state = args.STATE === 'on';
 
-        console.log('Getting LED Characteristic...');
-        ledCharacteristic = await service.getCharacteristic(LED_STATE_CHARACTERISTIC_UUID);
+        if (x < 0 || x > 4 || y < 0 || y > 4) {
+            return 'Invalid LED position';
+        }
 
-        console.log('micro:bit connected!');
-    } catch (error) {
-        console.error('Connection error:', error);
+        const ledMatrix = new Uint8Array(5);
+        const byteIndex = y;
+        const bitIndex = 4 - x;
+
+        if (state) {
+            ledMatrix[byteIndex] |= (1 << bitIndex);
+        } else {
+            ledMatrix[byteIndex] &= ~(1 << bitIndex);
+        }
+
+        return this.ledCharacteristic.writeValue(ledMatrix)
+            .then(() => `LED at (${x},${y}) set to ${state ? 'ON' : 'OFF'}`)
+            .catch(error => {
+                console.error('Error setting LED:', error);
+                return 'Failed to set LED';
+            });
     }
 }
 
-// Set LED state
-async function setLED(x, y, state) {
-    if (!ledCharacteristic) {
-        console.error('Not connected to micro:bit');
-        return;
-    }
-
-    const ledMatrix = new Uint8Array(5);
-    const byteIndex = Math.floor(y / 8);
-    const bitIndex = y % 8;
-
-    // Set or clear the bit corresponding to the LED
-    if (state) {
-        ledMatrix[byteIndex] |= (1 << bitIndex);
-    } else {
-        ledMatrix[byteIndex] &= ~(1 << bitIndex);
-    }
-
-    try {
-        await ledCharacteristic.writeValue(ledMatrix);
-        console.log(`LED at (${x},${y}) set to ${state ? 'ON' : 'OFF'}`);
-    } catch (error) {
-        console.error('Error setting LED:', error);
-    }
-}
-
-// Example usage
-document.addEventListener('DOMContentLoaded', () => {
-    const connectButton = document.getElementById('connectButton');
-    const ledToggleButton = document.getElementById('ledToggleButton');
-
-    connectButton.addEventListener('click', connectMicrobit);
-
-    ledToggleButton.addEventListener('click', async () => {
-        // Toggle LED at position (2,2)
-        await setLED(2, 2, true);
-        setTimeout(() => setLED(2, 2, false), 1000); // Turn off after 1 second
-    });
-});
+Scratch.extensions.register(new Scratch3MicrobitExtension());
