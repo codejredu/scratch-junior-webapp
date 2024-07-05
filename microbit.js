@@ -1,100 +1,69 @@
-// שם התוסף
-Scratch.extensions["microbit_bluetooth"] = {
+// micro:bit Bluetooth UUIDs
+const MICROBIT_SERVICE_UUID = 'e95dd91d-251d-470a-a062-fa1922dfa9a8';
+const LED_STATE_CHARACTERISTIC_UUID = 'e95d7b77-251d-470a-a062-fa1922dfa9a8';
 
-  // שם התוסף שיופיע ב-Scratch
-  name: "Microbit Bluetooth",
+let microbitDevice;
+let ledCharacteristic;
 
-  // תיאור התוסף
-  description: "Connect to a Microbit via Bluetooth and control the LED matrix.",
+// Connect to micro:bit
+async function connectMicrobit() {
+    try {
+        console.log('Requesting Bluetooth Device...');
+        microbitDevice = await navigator.bluetooth.requestDevice({
+            filters: [{ services: [MICROBIT_SERVICE_UUID] }]
+        });
 
-  // קטגוריות התוסף
-  categories: ["Communication", "Sensors"],
+        console.log('Connecting to GATT Server...');
+        const server = await microbitDevice.gatt.connect();
 
-  // בלוקים
-  blocks: [
+        console.log('Getting LED Service...');
+        const service = await server.getPrimaryService(MICROBIT_SERVICE_UUID);
 
-    // בלוק להתחברות למיקרוביט באמצעות בלוטות'
-    {
-      opcode: "connectToMicrobit",
-      blockType: "command",
-      text: "Connect to Microbit",
-      args: [],
-    },
+        console.log('Getting LED Characteristic...');
+        ledCharacteristic = await service.getCharacteristic(LED_STATE_CHARACTERISTIC_UUID);
 
-    // בלוק לקריאת ערך מהמגנטומטר
-    {
-      opcode: "readMagnetometerX",
-      blockType: "reporter",
-      text: "Read Magnetometer X",
-      args: [],
-    },
+        console.log('micro:bit connected!');
+    } catch (error) {
+        console.error('Connection error:', error);
+    }
+}
 
-    // בלוק להגדרת בהירות של LED
-    {
-      opcode: "setLedBrightness",
-      blockType: "command",
-      text: "Set LED Brightness",
-      args: [
-        {
-          name: "led",
-          type: "number",
-          defaultValue: 1,
-          min: 1,
-          max: 5,
-        },
-        {
-          name: "brightness",
-          type: "number",
-          defaultValue: 0,
-          min: 0,
-          max: 255,
-        },
-      ],
-    },
+// Set LED state
+async function setLED(x, y, state) {
+    if (!ledCharacteristic) {
+        console.error('Not connected to micro:bit');
+        return;
+    }
 
-    // בלוק להצגת תו על גבי LED
-    {
-      opcode: "displayCharacter",
-      blockType: "command",
-      text: "Display Character",
-      args: [
-        {
-          name: "character",
-          type: "string",
-          defaultValue: "A",
-        },
-        {
-          name: "led",
-          type: "number",
-          defaultValue: 1,
-          min: 1,
-          max: 5,
-        },
-      ],
-    },
+    const ledMatrix = new Uint8Array(5);
+    const byteIndex = Math.floor(y / 8);
+    const bitIndex = y % 8;
 
-    // בלוק להגדרת כל ה-LEDים כבויים
-    {
-      opcode: "turnAllLedsOff",
-      blockType: "command",
-      text: "Turn All LEDs Off",
-      args: [],
-    },
+    // Set or clear the bit corresponding to the LED
+    if (state) {
+        ledMatrix[byteIndex] |= (1 << bitIndex);
+    } else {
+        ledMatrix[byteIndex] &= ~(1 << bitIndex);
+    }
 
-    // בלוק להגדרת כל ה-LEDים למקסימום בהירות
-    {
-      opcode: "turnAllLedsOn",
-      blockType: "command",
-      text: "Turn All LEDs On",
-      args: [],
-    },
+    try {
+        await ledCharacteristic.writeValue(ledMatrix);
+        console.log(`LED at (${x},${y}) set to ${state ? 'ON' : 'OFF'}`);
+    } catch (error) {
+        console.error('Error setting LED:', error);
+    }
+}
 
-  ],
+// Example usage
+document.addEventListener('DOMContentLoaded', () => {
+    const connectButton = document.getElementById('connectButton');
+    const ledToggleButton = document.getElementById('ledToggleButton');
 
-  // אירועים
-  events: [],
+    connectButton.addEventListener('click', connectMicrobit);
 
-  // דגלים
-  flags: [],
-
-};
+    ledToggleButton.addEventListener('click', async () => {
+        // Toggle LED at position (2,2)
+        await setLED(2, 2, true);
+        setTimeout(() => setLED(2, 2, false), 1000); // Turn off after 1 second
+    });
+});
